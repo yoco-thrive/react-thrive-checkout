@@ -1,5 +1,5 @@
 import React from 'react';
-import buttonStyle from './buttonStyle';
+import { buttonStyle, textStyle } from './styles';
 
 class Thrive extends React.Component {
     constructor(props) {
@@ -60,24 +60,20 @@ class Thrive extends React.Component {
     }
 
     renderChildren() {
-        if (this.props.children) {
-            return (this.props.children);
-        } else {
-            if (this.state.popupHasLoaded) {
-                return ('Enter Card Details');
-            } else {
-                return ('Loading');
-            }
-        }
+        return (
+            <p style={this.state.popupHasLoaded ? textStyle.default : textStyle.disabled}>
+                Pay Now
+            </p>
+        );
     }
 
     render() {
         return (
             <button
-                onClick={this.showPopup}
-                style={this.props.style || buttonStyle}
+                onClick={this.state.popupHasLoaded && this.showPopup}
+                style={this.props.buttonStyle || (this.state.popupHasLoaded ? buttonStyle.default : buttonStyle.disabled)}
             >
-                {this.renderChildren()}
+                {this.props.children ? this.props.children : this.renderChildren()}
             </button>
         );
     }
