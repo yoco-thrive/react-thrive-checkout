@@ -70,7 +70,7 @@ class ThrivePopupBtn extends React.Component {
     render() {
         return (
             <button
-                onClick={this.state.popupHasLoaded && this.showPopup}
+                onClick={() => this.state.popupHasLoaded && this.showPopup()}
                 style={this.props.buttonStyle || (this.state.popupHasLoaded ? buttonStyle.default : buttonStyle.disabled)}
             >
                 {this.props.children ? this.props.children : this.renderChildren()}
