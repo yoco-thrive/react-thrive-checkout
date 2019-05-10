@@ -10,6 +10,7 @@ class ThrivePopupBtn extends React.Component {
         }
 
         this.showPopup = this.showPopup.bind(this);
+        this.validFieldParams = this.validFieldParams.bind(this);
     }
 
     componentWillMount() {
@@ -24,6 +25,7 @@ class ThrivePopupBtn extends React.Component {
     }
     
     onScriptLoaded() {
+        window.ThrivePopup = window.ThrivePopup || window.YocoPopup;
         this.props.hasLoadedCallback && this.props.hasLoadedCallback();
         this.setState({ popupHasLoaded: true });
     }
@@ -34,11 +36,10 @@ class ThrivePopupBtn extends React.Component {
     }
 
     showPopup() {
-        let Popup = window.YocoPopup;
-        if (Popup) {
+        if (ThrivePopup) {
             console.info('Loading Popup');
 
-            Popup.setup({
+            ThrivePopup.setup({
             publicKey: this.props.publicKey || '',
             amountInCents: this.props.amountInCents || 0,
             currency: this.props.currency || 'ZAR',
@@ -59,6 +60,35 @@ class ThrivePopupBtn extends React.Component {
         }
     }
 
+    validFieldParams() {
+        const errors = [];
+
+        if (!this.props.publicKey) {
+            errors.push('publicKey field is empty');
+        }
+        if (!this.props.amountInCents || isNaN(this.props.amountInCents)) {
+            console.log(this.props.amountInCents)
+            errors.push('amountInCents field is invalid');
+        } else if (this.props.amount <= 0) {
+            errors.push('amountInCents must be larger than 0');
+        }
+
+        if (errors.length == 0) {
+            return (true);
+        } else {
+            for (const err of errors) {
+                console.error(err)
+            }
+            return (false);
+        }
+    }
+
+    handleButtonClick() {
+        if (this.state.popupHasLoaded && this.validFieldParams()) {
+            this.showPopup();
+        }
+    }
+
     renderChildren() {
         return (
             <p style={this.state.popupHasLoaded ? textStyle.default : textStyle.disabled}>
@@ -70,7 +100,7 @@ class ThrivePopupBtn extends React.Component {
     render() {
         return (
             <button
-                onClick={() => this.state.popupHasLoaded && this.showPopup()}
+                onClick={() => this.handleButtonClick()}
                 style={this.props.buttonStyle || (this.state.popupHasLoaded ? buttonStyle.default : buttonStyle.disabled)}
             >
                 {this.props.children ? this.props.children : this.renderChildren()}
