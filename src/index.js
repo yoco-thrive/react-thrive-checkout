@@ -1,7 +1,7 @@
 import React from 'react';
 import { buttonStyle, textStyle } from './styles';
 
-class Thrive extends React.Component {
+class ThrivePopupBtn extends React.Component {
     constructor(props) {
         super(props);
         
@@ -79,4 +79,4 @@ class Thrive extends React.Component {
     }
 }
 
-export default Thrive;
+export default ThrivePopupBtn;
