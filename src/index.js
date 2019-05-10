@@ -10,7 +10,6 @@ class ThrivePopupBtn extends React.Component {
         }
 
         this.showPopup = this.showPopup.bind(this);
-        this.validFieldParams = this.validFieldParams.bind(this);
     }
 
     componentWillMount() {
