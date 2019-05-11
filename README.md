@@ -7,7 +7,7 @@ Get started by installing with npm</br>
 ```npm install react-thrive-checkout```
 
 A simple implementation of the Thrive checkout might look like this:
-```
+```javascript
 import React from 'react';
 import ThrivePopupBtn from 'react-thrive-checkout';
 
@@ -40,5 +40,5 @@ class ThriveCheckout extends React.Component {
 export default ThriveCheckout;
 ```
 
-This renders a Thrive button like this:
+This renders a Thrive button like this:</br>
 `Insert image here`
