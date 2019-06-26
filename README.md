@@ -41,4 +41,6 @@ export default ThriveCheckout;
 ```
 
 This renders a Thrive button like this:</br>
-`Insert image here`
+![Image not found](https://github.com/GJSteyn/react-thrive-checkout/blob/popup-button-initial/pay-button.png)
+
+Feel free to use your own style for the button by simply overriding the `buttonStyle` attribute of the component.
